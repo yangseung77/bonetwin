@@ -1,0 +1,19 @@
+body {
+    background-color: #7CB4B8;
+    color: #524948
+  }
+
+  .button {
+    color: #57467b;
+    background-color: #fea048;
+    text-align: center;
+    font-size: 32px;
+    border-radius: 12px;
+    
+  }
+  
+  .button:hover {
+    box-shadow: 0 8px 16px 0 rgba(52,52,52,0.2), 0 6px 20px 0 rgba(52,52,52,0.19);
+    background-color: #524948;
+    color: #fea048;
+  }
