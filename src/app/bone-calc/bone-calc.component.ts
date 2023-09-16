@@ -45,14 +45,16 @@ PofY(b0: number, b1: number, b2: number, dmean: number, dsd: number) {
 /*
 loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
+*/
+calc(_event?: MouseEvent){
     for (let i=0; i<24; i++) {
-        let curr = document.getElementById(elements[i]);
-        this.data.push(parseFloat(curr.value));
+        let curr = document.getElementById(this.elements[i]) as HTMLInputElement;
+        this.data.push(parseFloat(curr!.value));
     }
-    let res = PofY(0.1, 0.25, 0.5, 0.6, 0.75);
-    console.log(data);
+    let res = this.PofY(0.1, 0.25, 0.5, 0.6, 0.75);
+    console.log(this.data);
     window.alert("Calculated Probability: " + res.toString());
-}); */
+}
 
 
 }
