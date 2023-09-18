@@ -1,4 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Statclass } from '../statclass';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { StatDataService } from '../statdata.service';
+import { Router } from '@angular/router';
+
+@Injectable({ providedIn: 'root' })
 
 @Component({
   selector: 'app-bone-calc',
@@ -6,6 +13,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./bone-calc.component.scss']
 })
 export class BoneCalcComponent {
+
+  public csvData: any[] = [];
+  public records: any[] = [];
+  public headers: any[] = [];
+
+  constructor(private sd: StatDataService) {}
+  
+  ngOnInit(): void {
+    this.sd.getData().subscribe(temp => {
+      let csvRecordsArray = (<string>temp).split(/\r\n|\n/);  
+  
+        let headersRow = this.getHeaderArray(csvRecordsArray);  
+  
+        this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);  
+        console.log(this.records)
+       
+      
+
+    })
+  }
 
 
   loginForm = document.getElementById("dataform");
@@ -55,6 +82,31 @@ calc(_event?: MouseEvent){
     console.log(this.data);
     window.alert("Calculated Probability: " + res.toString());
 }
+
+getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {  
+  let csvArr = [];  
+
+  for (let i = 1; i < csvRecordsArray.length; i++) {  
+    let curruntRecord = (<string>csvRecordsArray[i]).split(',');  
+    if (curruntRecord.length == headerLength) {  
+      let csvRecord: Statclass = new Statclass();  
+      csvRecord.mean = curruntRecord[0].trim();  
+      csvRecord.sensitivity = curruntRecord[1].trim();  
+      csvRecord.specificity = curruntRecord[2].trim();  
+      csvArr.push(csvRecord);  
+    }  
+  }  
+  return csvArr;  
+}  
+
+getHeaderArray(csvRecordsArr: any) {  
+  let headers = (<string>csvRecordsArr[0]).split(',');  
+  let headerArray = [];  
+  for (let j = 0; j < headers.length; j++) {  
+    headerArray.push(headers[j]);  
+  }  
+  return headerArray;  
+}  
 
 
 }
