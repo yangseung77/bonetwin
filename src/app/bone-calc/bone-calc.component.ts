@@ -90,7 +90,7 @@ getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {
     let curruntRecord = (<string>csvRecordsArray[i]).split(',');  
     if (curruntRecord.length == headerLength) {  
       let csvRecord: Statclass = new Statclass();  
-      csvRecord.mean = curruntRecord[0].trim();  
+      csvRecord.stat = curruntRecord[0].trim();  
       csvRecord.sensitivity = curruntRecord[1].trim();  
       csvRecord.specificity = curruntRecord[2].trim();  
       csvArr.push(csvRecord);  
