@@ -1,70 +1,43 @@
-<p>bone-calc works!</p>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/style.css">
-    <script src="/index.js" type="module"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.scss">
+    <script src="/bone-calc.components.ts" type="module"></script>
 </head>
 
 <body>
+        
+    <div style="text-align: center;">
+        <h3>Select sex and bone</h3>
+        <form action="" id="dataform">
+            <label for="choose_sex">Select Sex:</label> 
+                <select name="sex" id="sex"> 
+                    <option value="male">Male</option> 
+                    <option value="female">Female</option> 
+                </select>
+            <label for="choose_bone">Select Bone:</label> 
+                <select name="bone" id="bone"> 
+                    <option value="femur">Femur</option>
+                    <option value="tibia">Tibia</option>
+                    <option value="fibula">Fibula</option>
+                    <option value="humerus">Humerus</option>
+                    <option value="radius">Radius</option>
+                    <option value="ulna">Ulna</option> 
+                </select>
+            <h3>Enter measurements</h3>
+            <input type="text" id="dmean" class="form-control" placeholder="D_mean">
+            <br>
+            <br>
+            <input type="text" id="dsd" class="form-control" placeholder="D_sd">
+            <br><br>
+            <button type="submit">Submit</button>
 
-    <form action="" id="dataform">
-        <h2>Femur</h2>
-        <h3>D_mean</h3>
-        <input type="text" id="femur_dmean_male" class="form-control" placeholder="Male">
-        <input type="text" id="femur_dmean_female" class="form-control" placeholder="Female">
-        <h3>D_sd</h3>
-        <input type="text" id="femur_dsd_male" class="form-control" placeholder="Male">
-        <input type="text" id="femur_dsd_female" class="form-control" placeholder="Female">
-        <br>
+        </form>
+    </div>
 
-        <h2>Tibia</h2>
-        <h3>D_mean</h3>
-        <input type="text" id="tibia_dmean_male" class="form-control" placeholder="Male">
-        <input type="text" id="tibia_dmean_female" class="form-control" placeholder="Female">
-        <h3>D_sd</h3>
-        <input type="text" id="tibia_dsd_male" class="form-control" placeholder="Male">
-        <input type="text" id="tibia_dsd_female" class="form-control" placeholder="Female">
-        <br>
-
-        <h2>Fibula</h2>
-        <h3>D_mean</h3>
-        <input type="text" id="fibula_dmean_male" class="form-control" placeholder="Male">
-        <input type="text" id="fibula_dmean_female" class="form-control" placeholder="Female">
-        <h3>D_sd</h3>
-        <input type="text" id="fibula_dsd_male" class="form-control" placeholder="Male">
-        <input type="text" id="fibula_dsd_female" class="form-control" placeholder="Female">
-        <br>
-
-        <h2>Humerus</h2>
-        <h3>D_mean</h3>
-        <input type="text" id="humerus_dmean_male" class="form-control" placeholder="Male">
-        <input type="text" id="humerus_dmean_female" class="form-control" placeholder="Female">
-        <h3>D_sd</h3>
-        <input type="text" id="humerus_dsd_male" class="form-control" placeholder="Male">
-        <input type="text" id="humerus_dsd_female" class="form-control" placeholder="Female">
-        <br>
-
-        <h2>Radius</h2>
-        <h3>D_mean</h3>
-        <input type="text" id="radius_dmean_male" class="form-control" placeholder="Male">
-        <input type="text" id="radius_dmean_female" class="form-control" placeholder="Female">
-        <h3>D_sd</h3>
-        <input type="text" id="radius_dsd_male" class="form-control" placeholder="Male">
-        <input type="text" id="radius_dsd_female" class="form-control" placeholder="Female">
-        <br>
-
-        <h2>Ulna</h2>
-        <h3>D_mean</h3>
-        <input type="text" id="ulna_dmean_male" class="form-control" placeholder="Male">
-        <input type="text" id="ulna_dmean_female" class="form-control" placeholder="Female">
-        <h3>D_sd</h3>
-        <input type="text" id="ulna_dsd_male" class="form-control" placeholder="Male">
-        <input type="text" id="ulna_dsd_female" class="form-control" placeholder="Female">
-        <br>
-
-        <br><br>
-        <button (click)="calc()" type="submit" class="button">Submit</button>
-    </form>
+    <div id="outputdiv" style="text-align: center;">
+    </div>
 </body>
+
 </html>
