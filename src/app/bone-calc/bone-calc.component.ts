@@ -139,7 +139,8 @@ PofY(b0: number, b1: number, b2: number, dmean: number, dsd: number) {
 loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
 */
-calc(_event?: MouseEvent){
+//_event?: MouseEvent
+calc(){
     /*for (let i=0; i<24; i++) {
         let curr = document.getElementById(this.elements[i]) as HTMLInputElement;
         this.data.push(parseFloat(curr!.value));
