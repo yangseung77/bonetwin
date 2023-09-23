@@ -7,6 +7,8 @@ import { StatDataService } from '../statdata.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Superstats } from '../superstats';
+import { Koreamonostats } from '../koreamonostats';
+import { formatCurrency } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 
@@ -17,13 +19,16 @@ import { Superstats } from '../superstats';
 })
 export class BoneCalcComponent {
 
-  public csvData: any[] = [];
+ // public csvData: any[] = [];
   public femurMeanFemale: any[] = []; //array holds femur mean data for females
   public femurSDFemale: any[] = []; //array holds femur sd data for females
   //public headers: any[] = [];
   public koreaCon: any[] = []; //array holds constants for korea data. b0, b1, b2 are array entires 0, 1 , 2
   public boneDataArr: any[] = []; //this will holds bone data arrays
   public superArr: any[] = [];
+  //public monoData: any[] = []; //array holds monolithic data
+
+  public boneDataArrMono: any[] = []; //this will holds bone data arrays for monolithic data
 
   applyForm = new FormGroup({
     gender: new FormControl(''),
@@ -77,6 +82,16 @@ export class BoneCalcComponent {
         tempSuper.headerData = headersRow;
         tempSuper.boneStats  = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
         this.boneDataArr.push(tempSuper) 
+        //console.log(this.femurSDFemale)
+    })
+
+    //this gets monolithic data
+    this.sd.getMono().subscribe(temp => {
+      let csvRecordsArray = (<string>temp).split(/\r\n|\n/);  
+  
+        let headersRow = this.getHeaderArray(csvRecordsArray); 
+        this.boneDataArrMono = this.getMonoRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+        //this.boneDataArrMono.push(tempSuper) 
         //console.log(this.femurSDFemale)
     })
 
@@ -153,9 +168,11 @@ calc(){
 
     //let res = this.PofY(0.1, 0.25, 0.5, 0.6, 0.75);
     let res = this.getKorCons(bone, gender, calcChoice, this.koreaCon, mean, sd)
-    let stat = this.getStatValue(this.boneDataArr, gender, bone, calcChoice, res)
+   // let stat = this.getStatValue(this.boneDataArr, gender, bone, calcChoice, res) //this is single file version
+    let stat = this.getStatValueMono(this.boneDataArrMono, gender, bone, calcChoice, res) //this is for monodata
     console.log(this.data);
     window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
+    this.applyForm.reset();
 }
 
 getKorCons(bone: any, gender: any, choice: any, consArray: any, mean: number, sd: number) {
@@ -189,6 +206,7 @@ getKorCons(bone: any, gender: any, choice: any, consArray: any, mean: number, sd
 }
 
 //bone gender type header data bone stats
+//this version is the one that used individual stat data files
 getStatValue(statArr: any, gender: any, bone: any, choice: any, prob: number){
   let closest: number = -9999;
   let data: string = '';
@@ -206,8 +224,38 @@ getStatValue(statArr: any, gender: any, bone: any, choice: any, prob: number){
   return data;
 }
 
+//this version uses monolithic data
+getStatValueMono(statArr: any, gender: any, bone: any, choice: any, prob: number){
+  let closest: number = -9999;
+  let data: string = '';
+  let decimal : number;
+  var tempArr : any[] = [];
+  let tempData : Koreamonostats = new Koreamonostats();
+  //get data you need from monolithic set
+  //console.log (bone + gender + choice )
+  for (let i = 0; i < statArr.length; i++){
+    if (statArr[i].bone == bone && statArr[i].gender == gender && statArr[i].type == choice){
+      console.log(statArr[i].bone)
+      tempArr.push(statArr[i])
+    }
+  }
 
-// this function creates an array of objects that holds stat data for bones
+
+  //for (let i = 0; i < tempArr.length; i++){
+    //if (statArr[i].headerData[1] == gender && statArr[i].headerData[0] == bone && statArr[i].headerData[2] == choice) {
+    decimal = Number(prob.toFixed(7))
+    //console.log(statArr[i].boneStats)
+    closest = this.closestIndexMono(decimal, tempArr);
+      data = "stat value: " + tempArr[closest].prob + " sensitivity: " + tempArr[closest].sensitivity + " specificity " + tempArr[closest].specificity;
+
+    //}
+  
+
+  return data;
+}
+
+
+// this function creates an array of objects that holds stat data for bones single file version
 getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {  
   let csvArr = [];  
 //bone gender type
@@ -226,6 +274,29 @@ getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {
   }  
   return csvArr;  
 }  
+
+//This creates records array from monolithic data
+getMonoRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {  
+  let csvArr = [];  
+//bone gender type
+  for (let i = 1; i < csvRecordsArray.length; i++) {  
+    let curruntRecord = (<string>csvRecordsArray[i]).split(',');  
+    if (curruntRecord.length == headerLength) {  
+      let csvRecord1: Koreamonostats = new Koreamonostats();  
+      csvRecord1.bone = curruntRecord[0].trim();
+      csvRecord1.gender = curruntRecord[1].trim();
+     csvRecord1.type = curruntRecord[2].trim();
+      csvRecord1.prob = curruntRecord[3].trim();  
+      csvRecord1.sensitivity = curruntRecord[4].trim();  
+      csvRecord1.specificity = curruntRecord[5].trim();  
+      csvArr.push(csvRecord1);  
+    }  
+  }  
+  return csvArr;  
+}  
+
+
+
 
 //this functions creates an array of objects that holds the korean constant data
 getConstantsFromCSVFile(csvRecordsArray: any, headerLength: any) {  
@@ -264,6 +335,7 @@ getHeaderArray(csvRecordsArr: any) {
   return headerArray;  
 } 
 
+//this is single file version
 closestIndex = (num:number, arr:any) => {
   //console.log(num)
   let curr = Number(arr[0].stat)
@@ -283,6 +355,28 @@ closestIndex = (num:number, arr:any) => {
   };
   return index;
 }
+
+//this is monolithic version
+closestIndexMono = (num:number, arr:any) => {
+  //console.log(num)
+  let curr = Number(arr[0].prob)
+  //console.log(arr[0].stat)
+  //console.log(curr) 
+  let diff = Math.abs(num - curr);
+  console.log(diff)
+  let index = 0;
+  for (let val = 0; val < arr.length; val++) {
+     let newdiff = Math.abs(Number(num) - Number(arr[val].prob));
+     console.log(newdiff)
+     if (newdiff < diff) {
+        diff = newdiff;
+        curr = Number(arr[val].prob);
+        index = val;
+     };
+  };
+  return index;
+}
+
 
 /*
 // Returns element closest to target in arr[]

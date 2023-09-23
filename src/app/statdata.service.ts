@@ -25,6 +25,11 @@ export class StatDataService {
     
   }
 
+  getMono():Observable<any>{
+    return this.http.get('assets/koreaMono.csv', { responseType: 'text' })
+    
+  }
+
   getKorea():Observable<any>{
     return this.http.get('assets/koreaconstants.csv', { responseType: 'text' })
     
