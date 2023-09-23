@@ -134,18 +134,18 @@ getKorCons(bone: any, gender: any, choice: any, consArray: any, mean: number, sd
   let b1 : any;
   let b2 : any;
   for (let i = 0; i < consArray.length; i++){
-    if (consArray[i].gender.tolower() == gender.tolower() && consArray.bone.tolower() == bone.tolower()) {
-      if (choice.tolower() == "mean"){
+    if (consArray[i].gender == gender && consArray[i].bone == bone) {
+      if (choice == "mean"){
         b0 = (consArray[i].mean[0]);
         b1 = consArray[i].mean[1];
         b2 = consArray[i].mean[2];
       }
-      else if (choice.tolower() == "sd"){
+      else if (choice == "sd"){
           b0 = consArray[i].sd[0];
           b1 = consArray[i].sd[1];
           b2 = consArray[i].sd[2];
       }
-      else if (choice.tolower() == "both"){
+      else if (choice == "both"){
         b0 = consArray[i].both[0];
         b1 = consArray[i].both[1];
         b2 = consArray[i].both[2];
@@ -154,6 +154,7 @@ getKorCons(bone: any, gender: any, choice: any, consArray: any, mean: number, sd
     }
     
   }
+  console.log(b0 + b1 + b2);
   let prob = this.PofY(Number(b0), Number(b1), Number(b2), mean, sd);
   return prob;
 }
