@@ -208,7 +208,7 @@ getKorCons(bone: any, gender: any, choice: any, consArray: any, mean: number, sd
 //bone gender type header data bone stats
 //this version is the one that used individual stat data files
 getStatValue(statArr: any, gender: any, bone: any, choice: any, prob: number){
-  let closest: number = -9999;
+  let closest: number;
   let data: string = '';
   let decimal : number;
   for (let i = 0; i < statArr.length; i++){
