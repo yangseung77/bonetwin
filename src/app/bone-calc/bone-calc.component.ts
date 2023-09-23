@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StatDataService } from '../statdata.service';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 
@@ -20,6 +21,15 @@ export class BoneCalcComponent {
   public femurSDFemale: any[] = []; //array holds femur sd data for females
   //public headers: any[] = [];
   public koreaCon: any[] = []; //array holds constants for korea data. b0, b1, b2 are array entires 0, 1 , 2
+
+  applyForm = new FormGroup({
+    gender: new FormControl(''),
+    bone: new FormControl(''),
+    calcChoice: new FormControl(''),
+    mean: new FormControl(''),
+    sd: new FormControl(''),
+  
+  });
 
   constructor(private sd: StatDataService) {}
   
@@ -94,6 +104,10 @@ PofY(b0: number, b1: number, b2: number, dmean: number, dsd: number) {
     return py;
 }
 
+
+
+
+
 /*
 loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -103,10 +117,49 @@ calc(_event?: MouseEvent){
         let curr = document.getElementById(this.elements[i]) as HTMLInputElement;
         this.data.push(parseFloat(curr!.value));
     }*/
-    let res = this.PofY(0.1, 0.25, 0.5, 0.6, 0.75);
+    let gender = this.applyForm.value.gender ?? '';
+    let bone = this.applyForm.value.bone ?? '';
+    let calcChoice = this.applyForm.value.calcChoice ?? '';
+    let mean = Number(this.applyForm.value.mean ?? 0);
+    let sd = Number(this.applyForm.value.sd ?? 0)
+
+    //let res = this.PofY(0.1, 0.25, 0.5, 0.6, 0.75);
+    let res = this.getKorCons(bone, gender, calcChoice, this.koreaCon, mean, sd)
     console.log(this.data);
     window.alert("Calculated Probability: " + res.toString());
 }
+
+getKorCons(bone: any, gender: any, choice: any, consArray: any, mean: number, sd: number) {
+  let b0 : any;
+  let b1 : any;
+  let b2 : any;
+  for (let i = 0; i < consArray.length; i++){
+    if (consArray[i].gender.tolower() == gender.tolower() && consArray.bone.tolower() == bone.tolower()) {
+      if (choice.tolower() == "mean"){
+        b0 = (consArray[i].mean[0]);
+        b1 = consArray[i].mean[1];
+        b2 = consArray[i].mean[2];
+      }
+      else if (choice.tolower() == "sd"){
+          b0 = consArray[i].sd[0];
+          b1 = consArray[i].sd[1];
+          b2 = consArray[i].sd[2];
+      }
+      else if (choice.tolower() == "both"){
+        b0 = consArray[i].both[0];
+        b1 = consArray[i].both[1];
+        b2 = consArray[i].both[2];
+    }
+        
+    }
+    
+  }
+  let prob = this.PofY(Number(b0), Number(b1), Number(b2), mean, sd);
+  return prob;
+}
+
+
+
 
 // this function creates an array of objects that holds stat data for bones
 getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {  
