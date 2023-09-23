@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StatDataService } from '../statdata.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Superstats } from '../superstats';
 
 @Injectable({ providedIn: 'root' })
 
@@ -21,6 +22,8 @@ export class BoneCalcComponent {
   public femurSDFemale: any[] = []; //array holds femur sd data for females
   //public headers: any[] = [];
   public koreaCon: any[] = []; //array holds constants for korea data. b0, b1, b2 are array entires 0, 1 , 2
+  public boneDataArr: any[] = []; //this will holds bone data arrays
+  public superArr: any[] = [];
 
   applyForm = new FormGroup({
     gender: new FormControl(''),
@@ -38,8 +41,13 @@ export class BoneCalcComponent {
       let csvRecordsArray = (<string>temp).split(/\r\n|\n/);  
   
         let headersRow = this.getHeaderArray(csvRecordsArray); 
-  
-        this.femurMeanFemale = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);  
+        
+        this.femurMeanFemale = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+        //this.boneDataArr.push(this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length));
+        let tempSuper: Superstats = new Superstats();
+        tempSuper.headerData = headersRow;
+        tempSuper.boneStats  = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+        this.boneDataArr.push(tempSuper)
         //console.log(this.femurMeanFemale)
     })
 
@@ -48,10 +56,29 @@ export class BoneCalcComponent {
   
         let headersRow = this.getHeaderArray(csvRecordsArray); 
   
-        this.femurSDFemale = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);  
+        this.femurSDFemale = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+        //this.boneDataArr.push(this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length)) 
+        let tempSuper: Superstats = new Superstats();
+        tempSuper.headerData = headersRow;
+        tempSuper.boneStats  = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+        this.boneDataArr.push(tempSuper) 
         //console.log(this.femurSDFemale)
+        console.log(this.boneDataArr[0].headerData[0])
     })
 
+    this.sd.getFemurBothFemale().subscribe(temp => {
+      let csvRecordsArray = (<string>temp).split(/\r\n|\n/);  
+  
+        let headersRow = this.getHeaderArray(csvRecordsArray); 
+  
+        //this.femurSDFemale = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+        //this.boneDataArr.push(this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length)) 
+        let tempSuper: Superstats = new Superstats();
+        tempSuper.headerData = headersRow;
+        tempSuper.boneStats  = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+        this.boneDataArr.push(tempSuper) 
+        //console.log(this.femurSDFemale)
+    })
 
 
     this.sd.getKorea().subscribe(temp => {
@@ -125,8 +152,9 @@ calc(_event?: MouseEvent){
 
     //let res = this.PofY(0.1, 0.25, 0.5, 0.6, 0.75);
     let res = this.getKorCons(bone, gender, calcChoice, this.koreaCon, mean, sd)
+    let stat = this.getStatValue(this.boneDataArr, gender, bone, calcChoice, res)
     console.log(this.data);
-    window.alert("Calculated Probability: " + res.toString());
+    window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
 }
 
 getKorCons(bone: any, gender: any, choice: any, consArray: any, mean: number, sd: number) {
@@ -159,17 +187,36 @@ getKorCons(bone: any, gender: any, choice: any, consArray: any, mean: number, sd
   return prob;
 }
 
+//bone gender type header data bone stats
+getStatValue(statArr: any, gender: any, bone: any, choice: any, prob: number){
+  let closest: number = -9999;
+  let data: string = '';
+  let decimal : number;
+  for (let i = 0; i < statArr.length; i++){
+    if (statArr[i].headerData[1] == gender && statArr[i].headerData[0] == bone && statArr[i].headerData[2] == choice) {
+    decimal = Number(prob.toFixed(7))
+    //console.log(statArr[i].boneStats)
+    closest = this.closestIndex(decimal, statArr[i].boneStats);
+      data = "stat value: " + statArr[i].boneStats[closest].stat + " sensitivity: " + statArr[i].boneStats[closest].sensitivity + " specificity " + statArr[i].boneStats[closest].specificity;
 
+    }
+  }
+
+  return data;
+}
 
 
 // this function creates an array of objects that holds stat data for bones
 getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {  
   let csvArr = [];  
-
+//bone gender type
   for (let i = 1; i < csvRecordsArray.length; i++) {  
     let curruntRecord = (<string>csvRecordsArray[i]).split(',');  
     if (curruntRecord.length == headerLength) {  
       let csvRecord: Statclass = new Statclass();  
+      //csvRecord.bone = curruntRecord[0].trim();
+      //csvRecord.gender = curruntRecord[1].trim();
+     //csvRecord.type = curruntRecord[2].trim();
       csvRecord.stat = curruntRecord[0].trim();  
       csvRecord.sensitivity = curruntRecord[1].trim();  
       csvRecord.specificity = curruntRecord[2].trim();  
@@ -214,7 +261,92 @@ getHeaderArray(csvRecordsArr: any) {
     headerArray.push(headers[j]);  
   }  
   return headerArray;  
-}  
+} 
 
+closestIndex = (num:number, arr:any) => {
+  //console.log(num)
+  let curr = Number(arr[0].stat)
+  //console.log(arr[0].stat)
+  //console.log(curr) 
+  let diff = Math.abs(num - curr);
+  console.log(diff)
+  let index = 0;
+  for (let val = 0; val < arr.length; val++) {
+     let newdiff = Math.abs(Number(num) - Number(arr[val].stat));
+     console.log(newdiff)
+     if (newdiff < diff) {
+        diff = newdiff;
+        curr = Number(arr[val].stat);
+        index = val;
+     };
+  };
+  return index;
+}
+
+/*
+// Returns element closest to target in arr[]
+findClosest(arr:any, target:any)
+{
+    let n = arr.length;
+ 
+    // Corner cases
+    if (target <= arr[0])
+        return arr[0];
+    if (target >= arr[n - 1])
+        return arr[n - 1];
+ 
+    // Doing binary search
+    let i = 0, j = n, mid = 0;
+    while (i < j)
+    {
+        mid = (i + j) / 2;
+ 
+        if (arr[mid] == target)
+            return arr[mid];
+ 
+        // If target is less than array
+        // element,then search in left
+        if (target < arr[mid])
+        {
+      
+            // If target is greater than previous
+            // to mid, return closest of two
+            if (mid > 0 && target > arr[mid - 1])
+                return this.getClosest(arr[mid - 1],
+                                  arr[mid], target);
+               
+            // Repeat for left half
+            j = mid;             
+        }
+ 
+        // If target is greater than mid
+        else
+        {
+            if (mid < n - 1 && target < arr[mid + 1])
+                return this.getClosest(arr[mid],
+                                  arr[mid + 1],
+                                  target);               
+            i = mid + 1; // update i
+        }
+    }
+ 
+    // Only single element left after search
+    return arr[mid];
+  
+}
+ 
+// Method to compare which one is the more close
+// We find the closest by taking the difference
+//  between the target and both values. It assumes
+// that val2 is greater than val1 and target lies
+// between these two.
+getClosest(val1:any, val2:any, target:any)
+{
+    if (target - val1 >= val2 - target)
+        return val2;       
+    else
+        return val1;       
+}
+ */
 
 }

@@ -20,6 +20,11 @@ export class StatDataService {
     
   }
 
+  getFemurBothFemale():Observable<any>{
+    return this.http.get('assets/FemurBothFemale.csv', { responseType: 'text' })
+    
+  }
+
   getKorea():Observable<any>{
     return this.http.get('assets/koreaconstants.csv', { responseType: 'text' })
     
