@@ -18,7 +18,7 @@
                     <option value="female">Female</option> 
                 </select>
             <label> Select Bone:</label> 
-                <select name="bone" id="bone" formControlName = "bone"> 
+                <select name="bone" id="bone" (change)="onOptionChange($event)"formControlName = "bone"> 
                     <option value="femur">Femur</option>
                     <option value="tibia">Tibia</option>
                     <option value="fibula">Fibula</option>
@@ -26,6 +26,7 @@
                     <option value="radius">Radius</option>
                     <option value="ulna">Ulna</option> 
                     </select>
+                    <div><img [src]="selectedImage"></div>
             <h3>Enter measurements</h3>
             <input type="text" id="dmean" class="form-control" placeholder="D_mean" formControlName = "mean">
             <br>

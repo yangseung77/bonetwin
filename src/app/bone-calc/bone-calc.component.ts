@@ -27,6 +27,7 @@ export class BoneCalcComponent {
   public boneDataArr: any[] = []; //this will holds bone data arrays
   public superArr: any[] = [];
   //public monoData: any[] = []; //array holds monolithic data
+  public selectedImage: string = '';
 
   public boneDataArrMono: any[] = []; //this will holds bone data arrays for monolithic data
 
@@ -377,6 +378,17 @@ closestIndexMono = (num:number, arr:any) => {
   return index;
 }
 
+onOptionChange(event: Event) {
+  const selectedOption = (event.target as HTMLSelectElement).value;
+
+  // Logic to determine the image source based on the selected option
+  // Update selectedImage accordingly
+  if (selectedOption === 'femur') {
+    this.selectedImage = 'assets/femurAoc.png';
+  } else if (selectedOption === 'image2') {
+    this.selectedImage = 'path_to_image2.jpg';
+  }
+}
 
 /*
 // Returns element closest to target in arr[]
