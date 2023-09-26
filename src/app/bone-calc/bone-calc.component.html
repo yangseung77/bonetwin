@@ -1,51 +1,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles.scss">
     <script src="/bone-calc.components.ts" type="module"></script>
 </head>
 
 <body>
         
-    <div style="text-align: center;">
-        <h3>Select sex and bone</h3>
-       <!-- <form action="" id="dataform"> -->
-        <form [formGroup]="applyForm" (ngSubmit)="calc()">
-            <label for="choose_sex">Select Sex:</label> 
-                <select name="sex" id="sex" formControlName ="gender"> 
-                    <option value="male">Male</option> 
-                    <option value="female">Female</option> 
-                </select>
-            <label> Select Bone:</label> 
-                <select name="bone" id="bone" (change)="onOptionChange($event)"formControlName = "bone"> 
-                    <option value="femur">Femur</option>
-                    <option value="tibia">Tibia</option>
-                    <option value="fibula">Fibula</option>
-                    <option value="humerus">Humerus</option>
-                    <option value="radius">Radius</option>
-                    <option value="ulna">Ulna</option> 
+    <div class="flex flex-col items-center justify-center border border-black rounded-md w-full h-full m-4 pb-2">
+        <div class="flex flex-col items-center">
+            <h3 class="py-2 text-black font-bold">Select sex and bone</h3>
+            <form [formGroup]="applyForm" (ngSubmit)="calc()">
+                <label class="pr-1 font-semibold" for="choose_sex">
+                    Select Sex: 
+                </label> 
+                    <select class="border border-slate-900 rounded-sm pr-2" name="sex" id="sex" formControlName ="gender"> 
+                        <option value="male">
+                            Male
+                        </option> 
+                        <option value="female">
+                            Female
+                        </option> 
                     </select>
-                    <div><img [src]="selectedImage"></div>
-            <h3>Enter measurements</h3>
-            <input type="text" id="dmean" class="form-control" placeholder="D_mean" formControlName = "mean">
-            <br>
-            <br>
-            <input type="text" id="dsd" class="form-control" placeholder="D_sd" formControlName = "sd">
-            <br><br>
-            <label for="choose_calc">Select Calculation Choice:</label> 
-            <select name="choice" id="choice" formControlName ="calcChoice"> 
-                <option value="mean">Mean</option> 
-                <option value="sd">SD</option> 
-                <option value="both">Both</option>
-            </select>
-            <br><br>
-            <button type="submit" >Submit</button>
-
-        </form> 
-    </div>
-
-    <div id="outputdiv" style="text-align: center;">
+                <label class="p-1 font-semibold">
+                     Select Bone: 
+                </label> 
+                    <select class="border border-slate-900 pr-2 rounded-sm" name="bone" id="bone" (change)="onOptionChange($event)"formControlName="bone">
+                        <option value="femur">
+                            Femur
+                        </option>
+                        <option value="tibia">
+                            Tibia
+                        </option>
+                        <option value="fibula">
+                            Fibula
+                        </option>
+                        <option value="humerus">
+                            Humerus
+                        </option>
+                        <option value="radius">
+                            Radius
+                        </option>
+                        <option value="ulna">
+                            Ulna
+                        </option> 
+                    </select>
+                    <div>
+                        <img [src]="selectedImage">
+                    </div>
+                <div class="py-3 flex flex-col">
+                    <p class="font-semibold pb-2">Enter measurements:</p>
+                    <input type="text" id="dmean" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mb-2" placeholder="D_mean" formControlName = "mean">
+                    <input type="text" id="dsd" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2" placeholder="D_sd" formControlName = "sd">
+                </div>
+                <div class="pt-2 pb-4">
+                    <label class="py-1 font-semibold" for="choose_calc">
+                        Select Calculation Choice: 
+                    </label> 
+                    <select class="border border-slate-900 pr-2 rounded-sm" name="choice" id="choice" formControlName ="calcChoice"> 
+                        <option value="mean">Mean</option> 
+                        <option value="sd">SD</option> 
+                        <option value="both">Both</option>
+                    </select>
+                </div>
+                <div class="flex justify-center">
+                    <button class="border border-x-white bg-green-500 rounded-md py-2 px-4 text-white" type="submit" >Submit</button>
+                </div>
+            </form> 
+        </div>
     </div>
 </body>
 
