@@ -383,8 +383,11 @@ onOptionChange(event: Event) {
 
   // Logic to determine the image source based on the selected option
   // Update selectedImage accordingly
+  //use this.applyForm.value.gender hint
   if (selectedOption === 'femur') {
-    this.selectedImage = 'assets/femurAoc.png ';
+   
+      this.selectedImage = 'assets/femurAoc.png ';
+   
   } else if (selectedOption === 'image2') {
     this.selectedImage = 'path_to_image2.jpg';
   }
