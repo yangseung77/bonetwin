@@ -12,6 +12,12 @@
         <h3>Select sex and bone</h3>
        <!-- <form action="" id="dataform"> -->
         <form [formGroup]="applyForm" (ngSubmit)="calc()">
+            <label for="choose_pop">Select Population</label>
+                <select name="population" id="pop" formControlName = "population">
+                    <option value="american">American</option>
+                    <option value="korean">Korean</option>
+                </select>
+                <br><br>
             <label for="choose_sex">Select Sex:</label> 
                 <select name="sex" id="sex" formControlName ="gender"> 
                     <option value="male">Male</option> 

@@ -32,6 +32,7 @@ export class BoneCalcComponent {
   public boneDataArrMono: any[] = []; //this will holds bone data arrays for monolithic data
 
   applyForm = new FormGroup({
+    population: new FormControl(''),
     gender: new FormControl(''),
     bone: new FormControl(''),
     calcChoice: new FormControl(''),
@@ -161,6 +162,7 @@ calc(){
         let curr = document.getElementById(this.elements[i]) as HTMLInputElement;
         this.data.push(parseFloat(curr!.value));
     }*/
+    let population = this.applyForm.value.population ?? '';
     let gender = this.applyForm.value.gender ?? '';
     let bone = this.applyForm.value.bone ?? '';
     let calcChoice = this.applyForm.value.calcChoice ?? '';
