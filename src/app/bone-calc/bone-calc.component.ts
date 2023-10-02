@@ -21,6 +21,7 @@ export class BoneCalcComponent {
 
  // public csvData: any[] = [];
   public femurMeanFemale: any[] = []; //array holds femur mean data for females
+  calculationResult: string = ''; // Property to store the calculation result
   public femurSDFemale: any[] = []; //array holds femur sd data for females
   //public headers: any[] = [];
   public koreaCon: any[] = []; //array holds constants for korea data. b0, b1, b2 are array entires 0, 1 , 2
@@ -150,6 +151,11 @@ PofY(b0: number, b1: number, b2: number, dmean: number, dsd: number) {
 
 
 
+reset(): void {
+  this.applyForm.reset();
+  this.selectedImage = '';
+  this.calculationResult = '';
+}
 
 
 /*
@@ -174,8 +180,9 @@ calc(){
    // let stat = this.getStatValue(this.boneDataArr, gender, bone, calcChoice, res) //this is single file version
     let stat = this.getStatValueMono(this.boneDataArrMono, gender, bone, calcChoice, res) //this is for monodata
     console.log(this.data);
-    window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
-    this.applyForm.reset();
+    this.calculationResult = `Calculated Probability: ${res.toString()} \n${stat}`;
+    //window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
+    //this.applyForm.reset();
 }
 
 getKorCons(bone: any, gender: any, choice: any, consArray: any, mean: number, sd: number) {
@@ -203,7 +210,7 @@ getKorCons(bone: any, gender: any, choice: any, consArray: any, mean: number, sd
     }
     
   }
-  console.log(b0 + b1 + b2);
+  //console.log(b0 + b1 + b2);
   let prob = this.PofY(Number(b0), Number(b1), Number(b2), mean, sd);
   return prob;
 }
@@ -219,7 +226,7 @@ getStatValue(statArr: any, gender: any, bone: any, choice: any, prob: number){
     decimal = Number(prob.toFixed(7))
     //console.log(statArr[i].boneStats)
     closest = this.closestIndex(decimal, statArr[i].boneStats);
-      data = "stat value: " + statArr[i].boneStats[closest].stat + " sensitivity: " + statArr[i].boneStats[closest].sensitivity + " specificity " + statArr[i].boneStats[closest].specificity;
+      data = "Stat value: " + statArr[i].boneStats[closest].stat + "\n" + "Sensitivity: " + statArr[i].boneStats[closest].sensitivity + "\n" + "Specificity " + statArr[i].boneStats[closest].specificity;
 
     }
   }
@@ -238,7 +245,7 @@ getStatValueMono(statArr: any, gender: any, bone: any, choice: any, prob: number
   //console.log (bone + gender + choice )
   for (let i = 0; i < statArr.length; i++){
     if (statArr[i].bone == bone && statArr[i].gender == gender && statArr[i].type == choice){
-      console.log(statArr[i].bone)
+      //console.log(statArr[i].bone)
       tempArr.push(statArr[i])
     }
   }
@@ -249,7 +256,7 @@ getStatValueMono(statArr: any, gender: any, bone: any, choice: any, prob: number
     decimal = Number(prob.toFixed(7))
     //console.log(statArr[i].boneStats)
     closest = this.closestIndexMono(decimal, tempArr);
-      data = "stat value: " + tempArr[closest].prob + " sensitivity: " + tempArr[closest].sensitivity + " specificity " + tempArr[closest].specificity;
+      data = "Stat value: " + tempArr[closest].prob + "\n" + "Sensitivity: " + tempArr[closest].sensitivity + "\n" + "Specificity " + tempArr[closest].specificity;
 
     //}
   
@@ -381,18 +388,48 @@ closestIndexMono = (num:number, arr:any) => {
 }
 
 onOptionChange(event: Event) {
-  const selectedOption = (event.target as HTMLSelectElement).value;
+  const selectedOption = this.applyForm.value.bone;
+  const population = this.applyForm.value.population;
+  const gender = this.applyForm.value.gender;
 
   // Logic to determine the image source based on the selected option
   // Update selectedImage accordingly
   //use this.applyForm.value.gender hint
-  if (selectedOption === 'femur') {
-   
-      this.selectedImage = 'assets/AocPictures/KMalFemurAoc.png ';
-   
-  } else if (selectedOption === 'image2') {
-    this.selectedImage = 'path_to_image2.jpg';
-  }
+  const imageMappings: { [key: string]: string } = {
+    // Korean Male
+    'femur_korean_male': 'assets/AocPictures/KMalFemurAoc.png',
+    'fibula_korean_male': 'assets/AocPictures/KMalFibulaAoc.png',
+    'tibia_korean_male': 'assets/AocPictures/KMalTibiaAoc.png',
+    'humerus_korean_male': 'assets/AocPictures/KMalHumerusAoc.png',
+    'ulna_korean_male': 'assets/AocPictures/KMalUlnaAoc.png',
+    'radius_korean_male': 'assets/AocPictures/KMalRadiusAoc.png',
+
+    // Korean Female
+    'femur_korean_female': 'assets/AocPictures/KFemFemurAoc.png',
+    'fibula_korean_female': 'assets/AocPictures/KFemFibulaAoc.png',
+    'tibia_korean_female': 'assets/AocPictures/KFemTibiaAoc.png',
+    'humerus_korean_female': 'assets/AocPictures/KFemHumerusAoc.png',
+    'ulna_korean_female': 'assets/AocPictures/KFemUlnaAoc.png',
+    'radius_korean_female': 'assets/AocPictures/KFemRadiusAoc.png',
+    
+    // American Male
+    'femur_american_male': 'assets/AocPictures/UMalFemurAoc.png',
+    'fibula_american_male': 'assets/AocPictures/UMalFibulaAoc.png',
+    'tibia_american_male': 'assets/AocPictures/UMalTibiaAoc.png',
+    'humerus_american_male': 'assets/AocPictures/UMalHumerusAoc.png',
+    'ulna_american_male': 'assets/AocPictures/UMalUlnaAoc.png',
+    'radius_american_male': 'assets/AocPictures/UMalRadiusAoc.png',
+
+    // American Female
+    'femur_american_female': 'assets/AocPictures/UFemFemurAoc.png',
+    'fibula_american_female': 'assets/AocPictures/UFemFibulaAoc.png',
+    'tibia_american_female': 'assets/AocPictures/UFemTibiaAoc.png',
+    'humerus_american_female': 'assets/AocPictures/UFemHumerusAoc.png',
+    'ulna_american_female': 'assets/AocPictures/UFemUlnaAoc.png',
+    'radius_american_female': 'assets/AocPictures/UFemRadiusAoc.png',
+  };
+  const key = `${selectedOption}_${population}_${gender}`;
+  this.selectedImage = imageMappings[key];
 }
 
 /*

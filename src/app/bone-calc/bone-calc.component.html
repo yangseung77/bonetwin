@@ -10,10 +10,21 @@
         <div class="flex flex-col items-center">
             <h3 class="py-2 text-black font-bold">Select sex and bone</h3>
             <form [formGroup]="applyForm" (ngSubmit)="calc()">
+                <label class="pr-1 font-semibold" for="choose_pop">
+                    Select Population
+                </label>
+                    <select class="border border-slate-900 rounded-sm pr-2" name="population" id="pop" (change)="onOptionChange($event)" formControlName = "population">
+                        <option value="american">
+                            American
+                        </option>
+                        <option value="korean">
+                            Korean
+                        </option>
+                    </select>
                 <label class="pr-1 font-semibold" for="choose_sex">
                     Select Sex: 
                 </label> 
-                    <select class="border border-slate-900 rounded-sm pr-2" name="sex" id="sex" formControlName ="gender"> 
+                    <select class="border border-slate-900 rounded-sm pr-2" name="sex" id="sex" (change)="onOptionChange($event)" formControlName ="gender"> 
                         <option value="male">
                             Male
                         </option> 
@@ -44,14 +55,9 @@
                             Ulna
                         </option> 
                     </select>
-                    <div>
-                        <img [src]="selectedImage">
+                    <div class="px-2 flex items-center justify-center">
+                        <img class="border border-black mt-4 mb-2 w-3/4" [src]="selectedImage" *ngIf="selectedImage">
                     </div>
-                <div class="py-3 flex flex-col">
-                    <p class="font-semibold pb-2">Enter measurements:</p>
-                    <input type="text" id="dmean" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mb-2" placeholder="D_mean" formControlName = "mean">
-                    <input type="text" id="dsd" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2" placeholder="D_sd" formControlName = "sd">
-                </div>
                 <div class="pt-2 pb-4">
                     <label class="py-1 font-semibold" for="choose_calc">
                         Select Calculation Choice: 
@@ -62,10 +68,22 @@
                         <option value="both">Both</option>
                     </select>
                 </div>
-                <div class="flex justify-center">
-                    <button class="border border-x-white bg-green-500 hover:bg-green-400 rounded-md py-2 px-4 text-white" type="submit" >Submit</button>
+                <div class="py-3 flex flex-col">
+                    <p class="font-semibold pb-2">Enter measurements:</p>
+                    <input type="text" id="dmean" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mb-2" placeholder="D_mean" formControlName = "mean">
+                    <input type="text" id="dsd" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2" placeholder="D_sd" formControlName = "sd">
                 </div>
-            </form> 
+                <div class="result-section">
+                    <ng-container *ngIf="calculationResult">
+                      <h4>Calculation Result:</h4>
+                      <pre>{{ calculationResult }}</pre>
+                    </ng-container>
+                </div>  
+                <div class="flex justify-center gap-3">
+                    <button class="border border-x-white bg-green-500 hover:bg-green-400 rounded-md py-2 px-4 text-white" type="submit" >Submit</button>
+                    <button class="border border-x-white bg-red-500 hover:bg-red-400 rounded-md py-2 px-5 text-white" type="reset" (click)="reset()">Reset</button>
+                </div>
+            </form>         
         </div>
     </div>
 </body>
