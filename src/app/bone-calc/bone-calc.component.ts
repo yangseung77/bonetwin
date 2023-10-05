@@ -34,6 +34,9 @@ export class BoneCalcComponent {
   public boneDataArrMono: any[] = []; //this will holds bone data arrays for monolithic data
   public boneDataArrMonoUS: any[] = []; //this will holds bone data arrays for monolithic data for american data
 
+
+  public selectedOption = ""; // This stores what option (mean, sd, both) was chosen.
+
   applyForm = new FormGroup({
     population: new FormControl(''),
     gender: new FormControl(''),

@@ -60,13 +60,21 @@
                         <label class="py-1 font-semibold" for="choose_calc">
                             Select Calculation Choice: 
                         </label> 
-                        <select class="border border-slate-900 pr-2 rounded-sm" name="choice" id="choice" formControlName ="calcChoice"> 
+                        <select class="border border-slate-900 pr-2 rounded-sm" name="choice" id="choice" [(ngModel)]="selectedOption" formControlName ="calcChoice"> 
                             <option value="mean">Mean</option> 
                             <option value="sd">SD</option> 
                             <option value="both">Both</option>
                         </select>
                     </div>
-                    <div class="py-3 flex flex-col">
+                    <div class="py-3 flex flex-col" *ngIf="selectedOption === 'mean'">
+                        <p class="font-semibold pb-2">Enter measurement:</p>
+                        <input type="text" id="dmean" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mb-2" placeholder="D_mean" formControlName = "mean">
+                    </div>
+                    <div class="py-3 flex flex-col" *ngIf="selectedOption === 'sd'">
+                        <p class="font-semibold pb-2">Enter measurement:</p>
+                        <input type="text" id="dsd" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2" placeholder="D_sd" formControlName = "sd">
+                    </div>
+                    <div class="py-3 flex flex-col" *ngIf="selectedOption === 'both'">
                         <p class="font-semibold pb-2">Enter measurements:</p>
                         <input type="text" id="dmean" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mb-2" placeholder="D_mean" formControlName = "mean">
                         <input type="text" id="dsd" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2" placeholder="D_sd" formControlName = "sd">
