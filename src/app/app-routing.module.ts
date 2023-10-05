@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoneCalcComponent } from './bone-calc/bone-calc.component';
-import { HelpScreenComponent } from './help-screen/help-screen.component';
+import { HelpScreenComponent } from './help/help.component';
 
 const routes: Routes = [
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'help-screen',
+    path: 'help',
     component: HelpScreenComponent,
    
   }

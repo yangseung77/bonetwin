@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BoneCalcComponent } from './bone-calc/bone-calc.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { HelpScreenComponent } from './help-screen/help-screen.component';
+import { HelpScreenComponent } from './help/help.component';
 import { RouterModule } from '@angular/router';
 
 
