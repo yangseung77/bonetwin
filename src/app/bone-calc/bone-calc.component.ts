@@ -25,12 +25,14 @@ export class BoneCalcComponent {
   public femurSDFemale: any[] = []; //array holds femur sd data for females
   //public headers: any[] = [];
   public koreaCon: any[] = []; //array holds constants for korea data. b0, b1, b2 are array entires 0, 1 , 2
+  public americaCon: any[] = []; //array holds constants for american data. b0, b1, b2 are array entires 0, 1 , 2
   public boneDataArr: any[] = []; //this will holds bone data arrays
   public superArr: any[] = [];
   //public monoData: any[] = []; //array holds monolithic data
   public selectedImage: string = '';
 
   public boneDataArrMono: any[] = []; //this will holds bone data arrays for monolithic data
+  public boneDataArrMonoUS: any[] = []; //this will holds bone data arrays for monolithic data for american data
 
   applyForm = new FormGroup({
     population: new FormControl(''),
@@ -98,6 +100,16 @@ export class BoneCalcComponent {
         //console.log(this.femurSDFemale)
     })
 
+    // get mono data for us
+    this.sd.getMonoUS().subscribe(temp => {
+      let csvRecordsArray = (<string>temp).split(/\r\n|\n/);  
+  
+        let headersRow = this.getHeaderArray(csvRecordsArray); 
+        this.boneDataArrMonoUS = this.getMonoRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+        //this.boneDataArrMono.push(tempSuper) 
+        //console.log(this.femurSDFemale)
+    })
+
 
     this.sd.getKorea().subscribe(temp => {
       let csvRecordsArray = (<string>temp).split(/\r\n|\n/);  
@@ -108,6 +120,18 @@ export class BoneCalcComponent {
         console.log(this.koreaCon[0].gender)  
         console.log(this.koreaCon)
     })
+
+    //this gets american constants
+    this.sd.getUS().subscribe(temp => {
+      let csvRecordsArray = (<string>temp).split(/\r\n|\n/);  
+  
+        let headersRow = this.getHeaderArray(csvRecordsArray); 
+  
+        this.americaCon = this.getConstantsFromCSVFile(csvRecordsArray, headersRow.length);
+        //console.log(this.koreaCon[0].gender)  
+        //console.log(this.koreaCon)
+    })
+
 
 
 
@@ -176,11 +200,21 @@ calc(){
     let sd = Number(this.applyForm.value.sd ?? 0)
 
     //let res = this.PofY(0.1, 0.25, 0.5, 0.6, 0.75);
-    let res = this.getKorCons(bone, gender, calcChoice, this.koreaCon, mean, sd)
+    if (population == "korean") {
+      let res = this.getKorCons(bone, gender, calcChoice, this.koreaCon, mean, sd)
    // let stat = this.getStatValue(this.boneDataArr, gender, bone, calcChoice, res) //this is single file version
-    let stat = this.getStatValueMono(this.boneDataArrMono, gender, bone, calcChoice, res) //this is for monodata
-    console.log(this.data);
-    this.calculationResult = `Calculated Probability: ${res.toString()} \n${stat}`;
+      let stat = this.getStatValueMono(this.boneDataArrMono, gender, bone, calcChoice, res) //this is for monodata
+      console.log(this.data);
+      this.calculationResult = `Calculated Probability: ${res.toString()} \n${stat}`;
+    }
+
+    else {
+      let res = this.getKorCons(bone, gender, calcChoice, this.americaCon, mean, sd)
+   // let stat = this.getStatValue(this.boneDataArr, gender, bone, calcChoice, res) //this is single file version
+      let stat = this.getStatValueMono(this.boneDataArrMonoUS, gender, bone, calcChoice, res) //this is for monodata
+      console.log(this.data);
+      this.calculationResult = `Calculated Probability: ${res.toString()} \n${stat}`;
+    }
     //window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
     //this.applyForm.reset();
 }

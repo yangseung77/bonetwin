@@ -29,9 +29,19 @@ export class StatDataService {
     return this.http.get('assets/koreaMono.csv', { responseType: 'text' })
     
   }
+//monolithic us data
+  getMonoUS():Observable<any>{
+    return this.http.get('assets/usMono.csv', { responseType: 'text' })
+    
+  }
 
   getKorea():Observable<any>{
     return this.http.get('assets/koreaconstants.csv', { responseType: 'text' })
+    
+  }
+
+  getUS():Observable<any>{
+    return this.http.get('assets/americaconstants.csv', { responseType: 'text' })
     
   }
 
