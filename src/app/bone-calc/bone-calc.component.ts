@@ -202,6 +202,18 @@ calc(){
     let mean = Number(this.applyForm.value.mean ?? 0);
     let sd = Number(this.applyForm.value.sd ?? 0)
 
+    if (this.applyForm.value.calcChoice == "mean"){
+      sd = 0;
+    }
+
+    if (this.applyForm.value.calcChoice == "sd"){
+      mean = 0;
+  }
+
+    console.log(mean);
+    console.log(sd);
+
+
     //let res = this.PofY(0.1, 0.25, 0.5, 0.6, 0.75);
     if (population == "korean") {
       let res = this.getKorCons(bone, gender, calcChoice, this.koreaCon, mean, sd)
