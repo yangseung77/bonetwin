@@ -1,11 +1,12 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
         <script src="/bone-calc.components.ts" type="module"></script>
     </head>
     <body>   
         <div class="flex items-center justify-center"> 
-            <div class="relative flex flex-col items-center justify-center border border-black rounded-md w-full md:w-1/2 h-full m-4 pb-2">
+            <div class="flex flex-col items-center justify-center border border-black rounded-md w-full md:w-1/2 h-full m-4 pb-2">
                 <div class="flex flex-col items-center">
                     <form [formGroup]="applyForm" (ngSubmit)="calc()">
                         <div class="pb-2 pt-3">
@@ -95,11 +96,11 @@
                         </div>
                     </form>    
                 </div>
-                <div class="absolute right-1 top-1">
-                    <nav>
-                        <a [routerLink]="['/help']"><button class="border border-x-white bg-blue-500 hover:bg-blue-400 rounded-md py-2 px-4 text-white">Help</button></a>
-                    </nav>
-                </div>
+            </div>
+            <div class="absolute top-1 left-1 px-1">
+                <nav>
+                    <a [routerLink]="['/help']"><button class="border border-x-white bg-blue-500 hover:bg-blue-400 rounded-md py-2 px-4 text-white">Help</button></a>
+                </nav>
             </div>
         </div>
     </body>
