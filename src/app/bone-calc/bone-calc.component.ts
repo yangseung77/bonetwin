@@ -9,6 +9,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Superstats } from '../superstats';
 import { Koreamonostats } from '../koreamonostats';
 import { formatCurrency } from '@angular/common';
+import { HelpScreenComponent } from '../help-screen/help-screen.component';
+import { RouterModule } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 
