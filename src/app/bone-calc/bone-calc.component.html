@@ -5,12 +5,12 @@
         <script src="/bone-calc.components.ts" type="module"></script>
     </head>
     <body>   
-        <div class="flex items-center justify-center"> 
-            <div class="flex flex-col items-center justify-center border border-black rounded-md w-full md:w-1/2 h-full m-4 pb-2">
+        <div class="flex items-center justify-center m-1"> 
+            <div class="flex flex-col items-center justify-center border border-black rounded-md xs:w-full md:w-1/2 h-full m-4 pb-2">
                 <div class="flex flex-col items-center">
                     <form [formGroup]="applyForm" (ngSubmit)="calc()">
                         <div class="pb-2 pt-3">
-                        <label class="pr-1 font-semibold" for="choose_pop">
+                        <label class="mx-1 pr-1 font-semibold" for="choose_pop">
                             Select Population
                         </label>
                             <select class="border border-slate-900 rounded-sm pr-2" name="population" id="pop" (change)="onOptionChange($event)" formControlName = "population">
@@ -22,21 +22,21 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="pb-2">
-                        <label class="pr-1 font-semibold" for="choose_sex">
-                            Select Sex 
-                        </label> 
-                            <select class="border border-slate-900 rounded-sm pr-2" name="sex" id="sex" (change)="onOptionChange($event)" formControlName ="gender"> 
-                                <option value="male">
-                                    Male
-                                </option> 
-                                <option value="female">
-                                    Female
-                                </option> 
-                            </select>
+                        <div class="mx-1 pb-2">
+                            <label class="pr-1 font-semibold" for="choose_sex">
+                                Select Sex 
+                            </label> 
+                                <select class="border border-slate-900 rounded-sm pr-2" name="sex" id="sex" (change)="onOptionChange($event)" formControlName ="gender"> 
+                                    <option value="male">
+                                        Male
+                                    </option> 
+                                    <option value="female">
+                                        Female
+                                    </option> 
+                                </select>
                         </div>
-                        <div>
-                        <label class="p-1 font-semibold">
+                        <div class="mx-1 pb-2">
+                        <label class="pr-1 font-semibold">
                             Select Bone
                         </label> 
                             <select class="border border-slate-900 pr-2 rounded-sm" name="bone" id="bone" (change)="onOptionChange($event)"formControlName="bone">
@@ -60,10 +60,10 @@
                                 </option> 
                             </select>
                         </div>
-                            <div class="px-2 flex items-center justify-center">
+                            <div class="mx-1 px-2 flex items-center justify-center">
                                 <img class="border border-black mt-4 mb-2 w-3/4" [src]="selectedImage" *ngIf="selectedImage">
                             </div>
-                        <div class="pt-2 pb-4">
+                        <div class="pt-2 pb-4 m-1">
                             <label class="py-1 font-semibold" for="choose_calc">
                                 Select Calculation Choice: 
                             </label> 
@@ -73,24 +73,24 @@
                                 <option value="both">Both</option>
                             </select>
                         </div>
-                        <div class="py-3 flex flex-col" *ngIf="selectedOption === 'mean'">
+                        <div class="mx-1 py-3 flex flex-col" *ngIf="selectedOption === 'mean'">
                             <p class="font-semibold pb-2">Enter measurement:</p>
                             <input type="text" id="dmean" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mb-2" placeholder="D_mean" formControlName = "mean">
                         </div>
-                        <div class="py-3 flex flex-col" *ngIf="selectedOption === 'sd'">
+                        <div class="mx-1 py-3 flex flex-col" *ngIf="selectedOption === 'sd'">
                             <p class="font-semibold pb-2">Enter measurement:</p>
                             <input type="text" id="dsd" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2" placeholder="D_sd" formControlName = "sd">
                         </div>
-                        <div class="py-3 flex flex-col" *ngIf="selectedOption === 'both'">
+                        <div class="mx-1 py-3 flex flex-col" *ngIf="selectedOption === 'both'">
                             <p class="font-semibold pb-2">Enter measurements:</p>
-                            <input type="text" id="dmean" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mb-2" placeholder="D_mean" formControlName = "mean">
-                            <input type="text" id="dsd" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2" placeholder="D_sd" formControlName = "sd">
+                            <input type="text" id="dmean" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mb-2 mx-1" placeholder="D_mean" formControlName = "mean">
+                            <input type="text" id="dsd" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mx-1" placeholder="D_sd" formControlName = "sd">
                         </div>
-                        <!--
-                        <div class="p-2 mb-2 border border-black result-section" *ngIf="calculationResult">
+                        
+                        <div class="p-2 mx-1 mb-2 border border-black result-section" *ngIf="calculationResult">
                             <h4>Calculation Result:</h4>
                             <pre>{{ calculationResult }}</pre>
-                        </div>   -->
+                        </div>
                         <div class="flex justify-center gap-3">
                             <button class="border border-x-white bg-red-500 hover:bg-red-400 rounded-md py-2 px-5 text-white" (click)="reset()">Reset</button>
                             <button class="border border-x-white bg-green-500 hover:bg-green-400 rounded-md py-2 px-4 text-white" type="submit" >Submit</button>
