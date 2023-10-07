@@ -318,36 +318,36 @@ onOptionChange(event: Event) {
   //use this.applyForm.value.gender hint
   const imageMappings: { [key: string]: string } = {
     // Korean Male
-    'femur_korean_male': 'assets/AocPictures/KMalFemurAoc.png',
-    'fibula_korean_male': 'assets/AocPictures/KMalFibulaAoc.png',
-    'tibia_korean_male': 'assets/AocPictures/KMalTibiaAoc.png',
-    'humerus_korean_male': 'assets/AocPictures/KMalHumerusAoc.png',
-    'ulna_korean_male': 'assets/AocPictures/KMalUlnaAoc.png',
-    'radius_korean_male': 'assets/AocPictures/KMalRadiusAoc.png',
+    'femur_korean_male': 'assets/AucPictures/KMalFemurAuc.png',
+    'fibula_korean_male': 'assets/AucPictures/KMalFibulaAuc.png',
+    'tibia_korean_male': 'assets/AucPictures/KMalTibiaAuc.png',
+    'humerus_korean_male': 'assets/AucPictures/KMalHumerusAuc.png',
+    'ulna_korean_male': 'assets/AucPictures/KMalUlnaAuc.png',
+    'radius_korean_male': 'assets/AucPictures/KMalRadiusAuc.png',
 
     // Korean Female
-    'femur_korean_female': 'assets/AocPictures/KFemFemurAoc.png',
-    'fibula_korean_female': 'assets/AocPictures/KFemFibulaAoc.png',
-    'tibia_korean_female': 'assets/AocPictures/KFemTibiaAoc.png',
-    'humerus_korean_female': 'assets/AocPictures/KFemHumerusAoc.png',
-    'ulna_korean_female': 'assets/AocPictures/KFemUlnaAoc.png',
-    'radius_korean_female': 'assets/AocPictures/KFemRadiusAoc.png',
+    'femur_korean_female': 'assets/AucPictures/KFemFemurAuc.png',
+    'fibula_korean_female': 'assets/AucPictures/KFemFibulaAuc.png',
+    'tibia_korean_female': 'assets/AucPictures/KFemTibiaAuc.png',
+    'humerus_korean_female': 'assets/AucPictures/KFemHumerusAuc.png',
+    'ulna_korean_female': 'assets/AucPictures/KFemUlnaAuc.png',
+    'radius_korean_female': 'assets/AucPictures/KFemRadiusAuc.png',
     
     // American Male
-    'femur_american_male': 'assets/AocPictures/UMalFemurAoc.png',
-    'fibula_american_male': 'assets/AocPictures/UMalFibulaAoc.png',
-    'tibia_american_male': 'assets/AocPictures/UMalTibiaAoc.png',
-    'humerus_american_male': 'assets/AocPictures/UMalHumerusAoc.png',
-    'ulna_american_male': 'assets/AocPictures/UMalUlnaAoc.png',
-    'radius_american_male': 'assets/AocPictures/UMalRadiusAoc.png',
+    'femur_american_male': 'assets/AucPictures/UMalFemurAuc.png',
+    'fibula_american_male': 'assets/AucPictures/UMalFibulaAuc.png',
+    'tibia_american_male': 'assets/AucPictures/UMalTibiaAuc.png',
+    'humerus_american_male': 'assets/AucPictures/UMalHumerusAuc.png',
+    'ulna_american_male': 'assets/AucPictures/UMalUlnaAuc.png',
+    'radius_american_male': 'assets/AucPictures/UMalRadiusAuc.png',
 
     // American Female
-    'femur_american_female': 'assets/AocPictures/UFemFemurAoc.png',
-    'fibula_american_female': 'assets/AocPictures/UFemFibulaAoc.png',
-    'tibia_american_female': 'assets/AocPictures/UFemTibiaAoc.png',
-    'humerus_american_female': 'assets/AocPictures/UFemHumerusAoc.png',
-    'ulna_american_female': 'assets/AocPictures/UFemUlnaAoc.png',
-    'radius_american_female': 'assets/AocPictures/UFemRadiusAoc.png',
+    'femur_american_female': 'assets/AucPictures/UFemFemurAuc.png',
+    'fibula_american_female': 'assets/AucPictures/UFemFibulaAuc.png',
+    'tibia_american_female': 'assets/AucPictures/UFemTibiaAuc.png',
+    'humerus_american_female': 'assets/AucPictures/UFemHumerusAuc.png',
+    'ulna_american_female': 'assets/AucPictures/UFemUlnaAuc.png',
+    'radius_american_female': 'assets/AucPictures/UFemRadiusAuc.png',
   };
   const key = `${selectedOption}_${population}_${gender}`;
   this.selectedImage = imageMappings[key];
