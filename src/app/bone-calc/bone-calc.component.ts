@@ -192,7 +192,7 @@ getKorCons(bone: any, gender: any, choice: any, consArray: any, mean: number, sd
   return prob;
 }
 
-//this version uses monolithic data
+//this version uses monolithic data to find the closest probability and get the sensitivity and specificity
 getStatValueMono(statArr: any, gender: any, bone: any, choice: any, prob: number){
   let closest: number = -9999;
   let data: string = '';
@@ -201,6 +201,7 @@ getStatValueMono(statArr: any, gender: any, bone: any, choice: any, prob: number
   let tempData : Koreamonostats = new Koreamonostats();
   //get data you need from monolithic set
   //console.log (bone + gender + choice )
+  //this loop gets the relevant data from the monolithic csv
   for (let i = 0; i < statArr.length; i++){
     if (statArr[i].bone == bone && statArr[i].gender == gender && statArr[i].type == choice){
       //console.log(statArr[i].bone)
