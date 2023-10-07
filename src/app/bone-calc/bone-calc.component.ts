@@ -223,6 +223,7 @@ calc(){
       let stat = this.getStatValueMono(this.boneDataArrMono, gender, bone, calcChoice, res) //this is for monodata
       console.log(this.data);
       this.calculationResult = `Calculated Probability: ${res.toString()} \n${stat}`;
+      window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
     }
 
     else {
@@ -231,6 +232,7 @@ calc(){
       let stat = this.getStatValueMono(this.boneDataArrMonoUS, gender, bone, calcChoice, res) //this is for monodata
       console.log(this.data);
       this.calculationResult = `Calculated Probability: ${res.toString()} \n${stat}`;
+      window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
     }
     //window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
     //this.applyForm.reset();
