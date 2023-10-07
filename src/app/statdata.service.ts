@@ -9,37 +9,24 @@ export class StatDataService {
 
   constructor(private http: HttpClient) { }
 
-  //getData is for femur mean female
-  getData():Observable<any>{
-    return this.http.get('assets/FemurMeanFemale.csv', { responseType: 'text' })
-    
-  }
-
-  getFemurSDFemale():Observable<any>{
-    return this.http.get('assets/FemurSDFemale.csv', { responseType: 'text' })
-    
-  }
-
-  getFemurBothFemale():Observable<any>{
-    return this.http.get('assets/FemurBothFemale.csv', { responseType: 'text' })
-    
-  }
-
+   // read in monolithic korean data
   getMono():Observable<any>{
     return this.http.get('assets/koreaMono.csv', { responseType: 'text' })
     
   }
-//monolithic us data
+// read in monolithic us data
   getMonoUS():Observable<any>{
     return this.http.get('assets/usMono.csv', { responseType: 'text' })
     
   }
 
+  // read in korean constants
   getKorea():Observable<any>{
     return this.http.get('assets/koreaconstants.csv', { responseType: 'text' })
     
   }
 
+  // read in us constants
   getUS():Observable<any>{
     return this.http.get('assets/americaconstants.csv', { responseType: 'text' })
     
