@@ -35,39 +35,12 @@
                                     </option> 
                                 </select>
                         </div>
-                        <div class="mx-1 pb-2" *ngIf="selectedPop === 'american'">
-                        <label class="pr-1 font-semibold">
-                            Select Bone
-                        </label> 
-                            <select class="border border-slate-900 pr-2 rounded-sm" name="bone" id="bone" (change)="onOptionChange($event)"formControlName="bone">
-                                    <option value="femur">
-                                        Femur
-                                    </option>
-                                    <option value="tibia">
-                                        Tibia
-                                    </option>
-                                    <option value="fibula">
-                                        Fibula
-                                    </option>
-                                    <option value="humerus">
-                                        Humerus
-                                    </option>
-                                    <option value="radius">
-                                        Radius
-                                    </option>
-                                    <option value="ulna">
-                                        Ulna
-                                    </option>
-                                    <option value="clavicle">
-                                        Clavicle
-                                    </option>
-                            </select>
-                        </div>
-                        <div class="mx-1 pb-2" *ngIf="selectedPop === 'korean'">
+
+                        <div class="mx-1 pb-2" >
                             <label class="pr-1 font-semibold">
                                 Select Bone
                             </label> 
-                                <select class="border border-slate-900 pr-2 rounded-sm" name="bone" id="bone" (change)="onOptionChange($event)"formControlName="bone">
+                                <select class="border border-slate-900 pr-2 rounded-sm" name="bone" id="bone"  (change)="onOptionChange($event)"formControlName="bone">
                                         <option value="femur">
                                             Femur
                                         </option>
@@ -85,6 +58,9 @@
                                         </option>
                                         <option value="ulna">
                                             Ulna
+                                        </option>
+                                        <option *ngIf="selectedPop == 'american'" [value]="clavString">
+                                            Clavicle 
                                         </option>
                                 </select>
                             </div>

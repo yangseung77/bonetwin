@@ -34,6 +34,7 @@ export class BoneCalcComponent {
   public selectedOption = ""; // This stores what option (mean, sd, both) was chosen.
 
   public selectedPop = ""; // Stores which population is selected
+  public clavString = "clavicle"
 
   applyForm = new FormGroup({
     population: new FormControl(''),
