@@ -3454,7 +3454,6 @@ femur,female,sd,1,0.1,0
 femur,female,sd,1,0.067,0
 femur,female,sd,1,0.033,0
 femur,female,sd,1,0,0
-femur,female,both,0,1,1
 femur,female,both,0,1,0.508
 femur,female,both,0,1,0.492
 femur,female,both,0,1,0.475
@@ -3488,7 +3487,6 @@ femur,female,both,0.0000162,1,0.017
 femur,female,both,0.5000015,1,0
 femur,female,both,0.9999883,0.967,0
 femur,female,both,0.999997,0.933,0
-femur,female,both,1,0,0
 tibia,female,mean,0,1,1
 tibia,female,mean,0,1,0.981
 tibia,female,mean,0.0000001,1,0.963
