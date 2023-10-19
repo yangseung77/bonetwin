@@ -1599,7 +1599,6 @@ humerus,male,sd,.9986408 ,.065 ,.000 
 humerus,male,sd,.9989495 ,.043 ,.000 
 humerus,male,sd,.9990228 ,.022 ,.000 
 humerus,male,sd,1,.000 ,.000 
-humerus,male,both,-1,1.000 ,1.000 
 humerus,male,both,.0000000 ,1.000 ,.743 
 humerus,male,both,.0000000 ,1.000 ,.733 
 humerus,male,both,.0000000 ,1.000 ,.723 
@@ -1679,7 +1678,6 @@ humerus,male,both,.5000037 ,1.000 ,.000 
 humerus,male,both,.9999951 ,.978 ,.000 
 humerus,male,both,.9999976 ,.957 ,.000 
 humerus,male,both,.9999992 ,.935 ,.000 
-humerus,male,both,2,.000 ,.000 
 radius,male,mean,.0000000 ,1.000 ,1.000 
 radius,male,mean,.0000000 ,1.000 ,.990 
 radius,male,mean,.0000000 ,1.000 ,.980 
