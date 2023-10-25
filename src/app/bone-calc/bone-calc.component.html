@@ -11,7 +11,7 @@
                     <form [formGroup]="applyForm" (ngSubmit)="calc()">
                         <div class="pb-2 pt-3">
                         <label class="mx-1 pr-1 font-semibold" for="choose_pop">
-                            Select Population
+                            Population
                         </label>
                             <select class="border border-slate-900 rounded-sm pr-2" name="population" id="pop" [(ngModel)]="selectedPop" (change)="onOptionChange($event)" formControlName = "population">
                                 <option value="american">
@@ -24,7 +24,7 @@
                         </div>
                         <div class="mx-1 pb-2">
                             <label class="pr-1 font-semibold" for="choose_sex">
-                                Select Sex 
+                                Sex 
                             </label> 
                                 <select class="border border-slate-900 rounded-sm pr-2" name="sex" id="sex" (change)="onOptionChange($event)" formControlName ="gender"> 
                                     <option value="male">
@@ -38,7 +38,7 @@
 
                         <div class="mx-1 pb-2" >
                             <label class="pr-1 font-semibold">
-                                Select Bone
+                                Bone
                             </label> 
                                 <select class="border border-slate-900 pr-2 rounded-sm" name="bone" id="bone"  (change)="onOptionChange($event)"formControlName="bone">
                                         <option value="femur">
@@ -69,7 +69,7 @@
                             </div>
                         <div class="pt-2 pb-4 m-1">
                             <label class="py-1 font-semibold" for="choose_calc">
-                                Select Calculation Choice: 
+                                Variable(s): 
                             </label> 
                             <select class="border border-slate-900 pr-2 rounded-sm" name="choice" id="choice" [(ngModel)]="selectedOption" formControlName ="calcChoice"> 
                                 <option value="mean">Mean</option> 
