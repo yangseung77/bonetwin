@@ -218,7 +218,7 @@ getStatValueMono(statArr: any, gender: any, bone: any, choice: any, prob: number
     decimal = Number(prob.toFixed(7))
     //console.log(statArr[i].boneStats)
     closest = this.closestIndexMono(decimal, tempArr);
-      data = "Sensitivity: " + tempArr[closest].sensitivity + "\n" + "Specificity " + tempArr[closest].specificity;
+      data = "Sensitivity: " + tempArr[closest].sensitivity + "\n" + "1-Specificity: " + tempArr[closest].specificity;
 
     //}
   
