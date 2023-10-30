@@ -1,7 +1,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta name="viewport" content="width=device-width, user-scalable=yes">
         <script src="/bone-calc.components.ts" type="module"></script>
     </head>
     <body>   
@@ -66,6 +66,9 @@
                             </div>
                             <div class="mx-1 px-2 flex items-center justify-center">
                                 <img class="border border-black mt-4 mb-2 w-3/4" [src]="selectedImage" *ngIf="selectedImage">
+                            </div>
+                            <div class="mx-1 px-2 flex items-center justify-center">
+                                <img class="border border-black mt-4 mb-2 w-2/4" [src]="selectedTable" *ngIf="selectedTable">
                             </div>
                         <div class="pt-2 pb-4 m-1">
                             <label class="py-1 font-semibold" for="choose_calc">

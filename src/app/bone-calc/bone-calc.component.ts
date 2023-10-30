@@ -26,6 +26,7 @@ export class BoneCalcComponent {
   public americaCon: any[] = []; //array holds constants for american data. b0, b1, b2 are array entires 0, 1 , 2
 
   public selectedImage: string = '';
+  public selectedTable: string = '';
 
   public boneDataArrMono: any[] = []; //this will holds bone data arrays for monolithic data
   public boneDataArrMonoUS: any[] = []; //this will holds bone data arrays for monolithic data for american data
@@ -324,7 +325,7 @@ onOptionChange(event: Event) {
     'femur_korean_male': 'assets/AucPictures/KMalFemurAuc.png',
     'fibula_korean_male': 'assets/AucPictures/KMalFibulaAuc.png',
     'tibia_korean_male': 'assets/AucPictures/KMalTibiaAuc.png',
-    'humerus_korean_male': 'assets/AucPictures/KMalHumerusAuc.png',
+    'humerus_korean_male': 'assets/AucPictures/roc_male_hum.jpg',
     'ulna_korean_male': 'assets/AucPictures/KMalUlnaAuc.png',
     'radius_korean_male': 'assets/AucPictures/KMalRadiusAuc.png',
 
@@ -354,6 +355,9 @@ onOptionChange(event: Event) {
   };
   const key = `${selectedOption}_${population}_${gender}`;
   this.selectedImage = imageMappings[key];
+  if (key == 'humerus_korean_male'){
+    this.selectedTable = 'assets/AucPictures/KMalHumTable.png';
+  }
 }
 
 
