@@ -9,6 +9,8 @@ import { Koreamonostats } from '../koreamonostats';
 import { formatCurrency } from '@angular/common';
 import { HelpScreenComponent } from '../help/help.component';
 import { RouterModule } from '@angular/router';
+import { ElementRef } from '@angular/core';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @Injectable({ providedIn: 'root' })
 
@@ -37,6 +39,18 @@ export class BoneCalcComponent {
   public selectedPop = ""; // Stores which population is selected
   public clavString = "clavicle"
 
+ 
+
+  zoomConfig = {
+    imageSrc: 'your-image.jpg',  // URL of the image to zoom
+    zoomLevel: 3,               // Zoom level (1 is the default)
+    width: 400,                 // Width of the zoomed area
+    height: 400,                // Height of the zoomed area
+    scrollOffset: 50,           // Scroll offset for the zoomed area
+    containerBackground: '#fff', // Background color of the zoomed container
+    showZoomedArea: true,        // Show the zoomed area
+  };
+
   applyForm = new FormGroup({
     population: new FormControl(''),
     gender: new FormControl(''),
@@ -47,7 +61,7 @@ export class BoneCalcComponent {
   
   });
 
-  constructor(private sd: StatDataService) {}
+  constructor(private sd: StatDataService, private elementRef: ElementRef) {}
   
   ngOnInit(): void {
 
@@ -99,6 +113,13 @@ export class BoneCalcComponent {
 
 
 
+  }
+
+  onImageLoad(): void {
+    const imgElement = this.elementRef.nativeElement.querySelector('#zoomImage');
+    if (imgElement) {
+      // You can work with the imgElement here
+    }
   }
 
 

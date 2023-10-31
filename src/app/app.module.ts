@@ -7,6 +7,7 @@ import { BoneCalcComponent } from './bone-calc/bone-calc.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HelpScreenComponent } from './help/help.component';
 import { RouterModule } from '@angular/router';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 
 
@@ -23,6 +24,7 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
+    NgxImageZoomModule
     
   
   ],

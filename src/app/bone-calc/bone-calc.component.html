@@ -65,10 +65,10 @@
                                 </select>
                             </div>
                             <div class="mx-1 px-2 flex items-center justify-center">
-                                <img class="border border-black mt-4 mb-2 w-3/4" [src]="selectedImage" *ngIf="selectedImage">
+                                <img class="border border-black mt-4 mb-2 w-3/4" [src]="selectedImage" ngxImageZoom #zoomImage (load)="onImageLoad()" *ngIf="selectedImage">
                             </div>
                             <div class="mx-1 px-2 flex items-center justify-center">
-                                <img class="border border-black mt-4 mb-2 w-2/4" [src]="selectedTable" *ngIf="selectedTable">
+                                <img class="border border-black mt-4 mb-2 w-2/4" [src]="selectedTable" ngxImageZoom #zoomImage (load)="onImageLoad()" *ngIf="selectedTable">
                             </div>
                         <div class="pt-2 pb-4 m-1">
                             <label class="py-1 font-semibold" for="choose_calc">
