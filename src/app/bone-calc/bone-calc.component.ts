@@ -135,6 +135,7 @@ reset(): void {
   this.applyForm.reset();
   this.selectedImage = '';
   this.calculationResult = '';
+  this.selectedTable = '';
 }
 
 
