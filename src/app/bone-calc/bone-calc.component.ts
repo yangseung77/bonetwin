@@ -366,14 +366,16 @@ onOptionChange(event: Event) {
     'humerus_american_male': 'assets/AucGraphs/UMalHumerusAuc.png',
     'ulna_american_male': 'assets/AucGraphs/UMalUlnaAuc.png',
     'radius_american_male': 'assets/AucGraphs/UMalRadiusAuc.png',
+    'clavString_american_male': 'assets/AucGraphs/UMalClavicleAuc.png',
 
     // American Female
-    'femur_american_female': 'assets/AucPictures/UFemFemurAuc.png',
-    'fibula_american_female': 'assets/AucPictures/UFemFibulaAuc.png',
-    'tibia_american_female': 'assets/AucPictures/UFemTibiaAuc.png',
-    'humerus_american_female': 'assets/AucPictures/UFemHumerusAuc.png',
-    'ulna_american_female': 'assets/AucPictures/UFemUlnaAuc.png',
-    'radius_american_female': 'assets/AucPictures/UFemRadiusAuc.png',
+    'femur_american_female': 'assets/AucGraphs/UFemFemurAuc.png',
+    'fibula_american_female': 'assets/AucGraphs/UFemFibulaAuc.png',
+    'tibia_american_female': 'assets/AucGraphs/UFemTibiaAuc.png',
+    'humerus_american_female': 'assets/AucGraphs/UFemHumerusAuc.png',
+    'ulna_american_female': 'assets/AucGraphs/UFemUlnaAuc.png',
+    'radius_american_female': 'assets/AucGraphs/UFemRadiusAuc.png',
+    'clavString_american_female': 'assets/AucGraphs/UFemClavicleAuc.png',
   };
 
   const TableMappings: { [key: string]: string } = {
@@ -400,6 +402,7 @@ onOptionChange(event: Event) {
     'humerus_american_male': 'assets/AucTables/UMalHumerusAucTable.png',
     'ulna_american_male': 'assets/AucTables/UMalUlnaAucTable.png',
     'radius_american_male': 'assets/AucTables/UMalRadiusAucTable.png',
+    'clavString_american_male': 'assets/AucTables/UMalClavicleAucTable.png',
 
     // American Female
     'femur_american_female': 'assets/AucTables/UFemFemurAucTable.png',
@@ -408,6 +411,7 @@ onOptionChange(event: Event) {
     'humerus_american_female': 'assets/AucTables/UFemHumerusAucTable.png',
     'ulna_american_female': 'assets/AucTables/UFemUlnaAucTable.png',
     'radius_american_female': 'assets/AucTables/UFemRadiusAucTable.png',
+    'clavString_american_female': 'assets/AucTables/UFemClavicleAucTable.png',
   };
 
   const key = `${selectedOption}_${population}_${gender}`;
