@@ -338,6 +338,7 @@ onOptionChange(event: Event) {
   const selectedOption = this.applyForm.value.bone;
   const population = this.applyForm.value.population;
   const gender = this.applyForm.value.gender;
+  console.log(selectedOption)
 
   // Logic to determine the image source based on the selected option
   // Update selectedImage accordingly
@@ -366,7 +367,7 @@ onOptionChange(event: Event) {
     'humerus_american_male': 'assets/AucGraphs/UMalHumerusAuc.png',
     'ulna_american_male': 'assets/AucGraphs/UMalUlnaAuc.png',
     'radius_american_male': 'assets/AucGraphs/UMalRadiusAuc.png',
-    'clavString_american_male': 'assets/AucGraphs/UMalClavicleAuc.png',
+    'clavicle_american_male': 'assets/AucGraphs/UMalClavicleAuc.png',
 
     // American Female
     'femur_american_female': 'assets/AucGraphs/UFemFemurAuc.png',
@@ -375,7 +376,7 @@ onOptionChange(event: Event) {
     'humerus_american_female': 'assets/AucGraphs/UFemHumerusAuc.png',
     'ulna_american_female': 'assets/AucGraphs/UFemUlnaAuc.png',
     'radius_american_female': 'assets/AucGraphs/UFemRadiusAuc.png',
-    'clavString_american_female': 'assets/AucGraphs/UFemClavicleAuc.png',
+    'clavicle_american_female': 'assets/AucGraphs/UFemClavicleAuc.png',
   };
 
   const TableMappings: { [key: string]: string } = {
@@ -402,7 +403,7 @@ onOptionChange(event: Event) {
     'humerus_american_male': 'assets/AucTables/UMalHumerusAucTable.png',
     'ulna_american_male': 'assets/AucTables/UMalUlnaAucTable.png',
     'radius_american_male': 'assets/AucTables/UMalRadiusAucTable.png',
-    'clavString_american_male': 'assets/AucTables/UMalClavicleAucTable.png',
+    'clavicle_american_male': 'assets/AucTables/UMalClavicleAucTable.png',
 
     // American Female
     'femur_american_female': 'assets/AucTables/UFemFemurAucTable.png',
@@ -411,10 +412,12 @@ onOptionChange(event: Event) {
     'humerus_american_female': 'assets/AucTables/UFemHumerusAucTable.png',
     'ulna_american_female': 'assets/AucTables/UFemUlnaAucTable.png',
     'radius_american_female': 'assets/AucTables/UFemRadiusAucTable.png',
-    'clavString_american_female': 'assets/AucTables/UFemClavicleAucTable.png',
+    'clavicle_american_female': 'assets/AucTables/UFemClavicleAucTable.png',
   };
 
   const key = `${selectedOption}_${population}_${gender}`;
+  console.log(key)
+  
   this.selectedImage = imageMappings[key];
   this.selectedTable = TableMappings[key];
 }
