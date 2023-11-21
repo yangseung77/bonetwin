@@ -71,7 +71,8 @@ export class BoneCalcComponent {
     this.sd.getMono().subscribe(temp => {
       let csvRecordsArray = (<string>temp).split(/\r\n|\n/);  
   
-        let headersRow = this.getHeaderArray(csvRecordsArray); 
+        let headersRow = this.getHeaderArray(csvRecordsArray);
+        //holds array of objects 
         this.boneDataArrMono = this.getMonoRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
         //this.boneDataArrMono.push(tempSuper) 
         //console.log(this.femurSDFemale)
@@ -87,12 +88,12 @@ export class BoneCalcComponent {
         //console.log(this.femurSDFemale)
     })
 
-
+      //korean constants
     this.sd.getKorea().subscribe(temp => {
       let csvRecordsArray = (<string>temp).split(/\r\n|\n/);  
   
         let headersRow = this.getHeaderArray(csvRecordsArray); 
-  
+        //array of constant objects
         this.koreaCon = this.getConstantsFromCSVFile(csvRecordsArray, headersRow.length);
         console.log(this.koreaCon[0].gender)  
         console.log(this.koreaCon)
@@ -166,8 +167,10 @@ calc(){
 
     //let res = this.PofY(0.1, 0.25, 0.5, 0.6, 0.75);
     if (population == "korean") {
+      //calculates probability from user input
       let res = this.getKorCons(bone, gender, calcChoice, this.koreaCon, mean, sd)
    // let stat = this.getStatValue(this.boneDataArr, gender, bone, calcChoice, res) //this is single file version
+      //gets closest matched stat data
       let stat = this.getStatValueMono(this.boneDataArrMono, gender, bone, calcChoice, res) //this is for monodata
      // console.log(this.data);
       this.calculationResult = `Calculated Probability: ${res.toString()} \n${stat}`;
