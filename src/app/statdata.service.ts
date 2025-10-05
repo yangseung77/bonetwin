@@ -20,6 +20,12 @@ export class StatDataService {
     
   }
 
+  // read in monolithic roc data
+  getMonoROC():Observable<any>{
+    return this.http.get('assets/rocMono.csv', { responseType: 'text' })
+
+  }
+
   // read in korean constants
   getKorea():Observable<any>{
     return this.http.get('assets/koreaconstants.csv', { responseType: 'text' })
@@ -31,5 +37,12 @@ export class StatDataService {
     return this.http.get('assets/americaconstants.csv', { responseType: 'text' })
     
   }
+
+  // read in roc constants
+  getROC():Observable<any>{
+    return this.http.get('assets/rocconstants.csv', { responseType: 'text' })
+
+  }
+
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { Koreaconstants } from '../koreaconstants';
+import { Rocconstants } from '../rocconstants';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StatDataService } from '../statdata.service';
@@ -26,12 +27,14 @@ export class BoneCalcComponent {
   
   public koreaCon: any[] = []; //array holds constants for korea data. b0, b1, b2 are array entires 0, 1 , 2
   public americaCon: any[] = []; //array holds constants for american data. b0, b1, b2 are array entires 0, 1 , 2
+  public rocCon: any[] = []; //array holds constants for ROC data. b0, b1, b2 are array entires 0, 1 , 2
 
   public selectedImage: string = '';
   public selectedTable: string = '';
 
   public boneDataArrMono: any[] = []; //this will holds bone data arrays for monolithic data
   public boneDataArrMonoUS: any[] = []; //this will holds bone data arrays for monolithic data for american data
+  public boneDataArrMonoROC: any[] = []; //this will holds bone data arrays for monolithic data for roc data
 
 
   public selectedOption = ""; // This stores what option (mean, sd, both) was chosen.
@@ -88,6 +91,16 @@ export class BoneCalcComponent {
         //console.log(this.femurSDFemale)
     })
 
+    // get mono data for roc
+    this.sd.getMonoROC().subscribe(temp => {
+      let csvRecordsArray = (<string>temp).split(/\r\n|\n/);  
+  
+        let headersRow = this.getHeaderArray(csvRecordsArray); 
+        this.boneDataArrMonoROC = this.getMonoRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+        //this.boneDataArrMono.push(tempSuper) 
+        //console.log(this.femurSDFemale)
+    })
+
       //korean constants
     this.sd.getKorea().subscribe(temp => {
       let csvRecordsArray = (<string>temp).split(/\r\n|\n/);  
@@ -110,10 +123,14 @@ export class BoneCalcComponent {
         //console.log(this.koreaCon)
     })
 
-
-
-
-
+    //this gets roc constants
+    this.sd.getROC().subscribe(temp => {
+      let csvRecordsArray = (<string>temp).split(/\r\n|\n/);  
+  
+        let headersRow = this.getHeaderArray(csvRecordsArray); 
+  
+        this.rocCon = this.getConstantsFromCSVFile(csvRecordsArray, headersRow.length);
+    })
   }
 
   onImageLoad(): void {
@@ -172,6 +189,17 @@ calc(){
    // let stat = this.getStatValue(this.boneDataArr, gender, bone, calcChoice, res) //this is single file version
       //gets closest matched stat data
       let stat = this.getStatValueMono(this.boneDataArrMono, gender, bone, calcChoice, res) //this is for monodata
+     // console.log(this.data);
+      this.calculationResult = `Calculated Probability: ${res.toString()} \n${stat}`;
+     // window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
+    }
+
+    else if (population == "roc") {
+      //calculates probability from user input
+      let res = this.getKorCons(bone, gender, calcChoice, this.rocCon, mean, sd)
+   // let stat = this.getStatValue(this.boneDataArr, gender, bone, calcChoice, res) //this is single file version
+      //gets closest matched stat data
+      let stat = this.getStatValueMono(this.boneDataArrMonoROC, gender, bone, calcChoice, res) //this is for monodata
      // console.log(this.data);
       this.calculationResult = `Calculated Probability: ${res.toString()} \n${stat}`;
      // window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
@@ -380,6 +408,14 @@ onOptionChange(event: Event) {
     'ulna_american_female': 'assets/AucGraphs/UFemUlnaAuc.png',
     'radius_american_female': 'assets/AucGraphs/UFemRadiusAuc.png',
     'clavicle_american_female': 'assets/AucGraphs/UFemClavicleAuc.png',
+
+    // ROC Male
+    'femur_roc_male': 'assets/AucGraphs/RMalFemurAuc.png',
+    'fibula_roc_male': 'assets/AucGraphs/RMalFibulaAuc.png',
+    'humerus_roc_male': 'assets/AucGraphs/RMalHumerusAuc.png',
+    'radius_roc_male': 'assets/AucGraphs/RMalRadiusAuc.png',
+    'tibia_roc_male': 'assets/AucGraphs/RMalTibiaAuc.png',
+    'ulna_roc_male': 'assets/AucGraphs/RMalUlnaAuc.png',
   };
 
   const TableMappings: { [key: string]: string } = {
