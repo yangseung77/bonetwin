@@ -194,21 +194,21 @@ calc(){
      // window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
     }
 
-    else if (population == "american") {
-      let res = this.getKorCons(bone, gender, calcChoice, this.americaCon, mean, sd)
-   // let stat = this.getStatValue(this.boneDataArr, gender, bone, calcChoice, res) //this is single file version
-      let stat = this.getStatValueMono(this.boneDataArrMonoUS, gender, bone, calcChoice, res) //this is for monodata
-     // console.log(this.data);
-      this.calculationResult = `Calculated Probability: ${res.toString()} \n${stat}`;
-     // window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
-    }
-    
     else if (population == "roc") {
       //calculates probability from user input
       let res = this.getKorCons(bone, gender, calcChoice, this.rocCon, mean, sd)
    // let stat = this.getStatValue(this.boneDataArr, gender, bone, calcChoice, res) //this is single file version
       //gets closest matched stat data
       let stat = this.getStatValueMono(this.boneDataArrMonoROC, gender, bone, calcChoice, res) //this is for monodata
+     // console.log(this.data);
+      this.calculationResult = `Calculated Probability: ${res.toString()} \n${stat}`;
+     // window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
+    }
+
+    else {
+      let res = this.getKorCons(bone, gender, calcChoice, this.americaCon, mean, sd)
+   // let stat = this.getStatValue(this.boneDataArr, gender, bone, calcChoice, res) //this is single file version
+      let stat = this.getStatValueMono(this.boneDataArrMonoUS, gender, bone, calcChoice, res) //this is for monodata
      // console.log(this.data);
       this.calculationResult = `Calculated Probability: ${res.toString()} \n${stat}`;
      // window.alert("Calculated Probability: " + res.toString() + "\n" + stat);
