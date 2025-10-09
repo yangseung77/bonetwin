@@ -452,6 +452,14 @@ onOptionChange(event: Event) {
     'ulna_american_female': 'assets/AucTables/UFemUlnaAucTable.png',
     'radius_american_female': 'assets/AucTables/UFemRadiusAucTable.png',
     'clavicle_american_female': 'assets/AucTables/UFemClavicleAucTable.png',
+
+    // ROC Male
+    'femur_roc_male': 'assets/AucTables/RMalFemurAucTable.png',
+    'fibula_roc_male': 'assets/AucTables/RMalFibulaAucTable.png',
+    'humerus_roc_male': 'assets/AucTables/RMalHumerusAucTable.png',
+    'radius_roc_male': 'assets/AucTables/RMalRadiusAucTable.png',
+    'tibia_roc_male': 'assets/AucTables/RMalTibiaAucTable.png',
+    'ulna_roc_male': 'assets/AucTables/RMalUlnaAucTable.png',
   };
 
   const key = `${selectedOption}_${population}_${gender}`;

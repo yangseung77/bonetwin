@@ -15,27 +15,29 @@
                         </label>
                             <select class="border border-slate-900 rounded-sm pr-2" name="population" id="pop" [(ngModel)]="selectedPop" (change)="onOptionChange($event)" formControlName = "population">
                                 <option value="american">
-                                    American
+                                    American (Modern)
+                                </option>
+                                <option value="roc">
+                                    American (WWII)
                                 </option>
                                 <option value="korean">
                                     Korean
                                 </option>
-                                <option value="roc">
-                                    ROC
-                                </option>
+                                
                             </select>
                         </div>
                         <div class="mx-1 pb-2">
                             <label class="pr-1 font-semibold" for="choose_sex">
                                 Sex 
                             </label> 
-                                <select class="border border-slate-900 rounded-sm pr-2" name="sex" id="sex" (change)="onOptionChange($event)" formControlName ="gender"> 
+                                <select class="border border-slate-900 rounded-sm pr-2" name="sex" id="sex" (change)="onOptionChange($event)" formControlName ="gender">
+                                    <option value="" disabled selected></option>
                                     <option value="male">
                                         Male
                                     </option> 
-                                    <option value="female">
+                                    <option *ngIf="selectedPop !== 'roc'" value="female">
                                         Female
-                                    </option> 
+                                    </option>
                                 </select>
                         </div>
 
@@ -43,7 +45,7 @@
                             <label class="pr-1 font-semibold">
                                 Bone
                             </label> 
-                                <select class="border border-slate-900 pr-2 rounded-sm" name="bone" id="bone"  (change)="onOptionChange($event)"formControlName="bone">
+                                <select class="border border-slate-900 pr-2 rounded-sm" name="bone" id="bone"  (change)="onOptionChange($event)"formControlName="bone">    
                                         <option value="femur">
                                             Femur
                                         </option>
@@ -77,22 +79,22 @@
                             <label class="py-1 font-semibold" for="choose_calc">
                                 Variable(s): 
                             </label> 
-                            <select class="border border-slate-900 pr-2 rounded-sm" name="choice" id="choice" [(ngModel)]="selectedOption" formControlName ="calcChoice"> 
-                                <option value="mean">Mean</option> 
-                                <option value="sd">SD</option> 
-                                <option value="both">Both</option>
+                            <select class="border border-slate-900 pr-2 rounded-sm" name="choice" id="choice" [(ngModel)]="selectedOption" formControlName ="calcChoice">
+                                <option value="mean" title="D_mean">Dₘₑₐₙ</option> 
+                                <option value="sd" title="D_sd">Dₛd</option> 
+                                <option value="both" title="D_mean and D_sd">Dₘₑₐₙ and Dₛd</option>
                             </select>
                         </div>
                         <div class="mx-1 py-3 flex flex-col" *ngIf="selectedOption === 'mean'">
-                            <p class="font-semibold pb-2">Enter measurement:</p>
+                            <p class="font-semibold pb-2">Enter values:</p>
                             <input type="text" id="dmean" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mb-2" placeholder="D_mean" formControlName = "mean">
                         </div>
                         <div class="mx-1 py-3 flex flex-col" *ngIf="selectedOption === 'sd'">
-                            <p class="font-semibold pb-2">Enter measurement:</p>
+                            <p class="font-semibold pb-2">Enter values:</p>
                             <input type="text" id="dsd" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2" placeholder="D_sd" formControlName = "sd">
                         </div>
                         <div class="mx-1 py-3 flex flex-col" *ngIf="selectedOption === 'both'">
-                            <p class="font-semibold pb-2">Enter measurements:</p>
+                            <p class="font-semibold pb-2">Enter values:</p>
                             <input type="text" id="dmean" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mb-2 mx-1" placeholder="D_mean" formControlName = "mean">
                             <input type="text" id="dsd" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mx-1" placeholder="D_sd" formControlName = "sd">
                         </div>
