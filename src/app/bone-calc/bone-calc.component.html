@@ -79,12 +79,29 @@
                             <label class="py-1 font-semibold" for="choose_calc">
                                 Variable(s): 
                             </label> 
-                            <select class="border border-slate-900 pr-2 rounded-sm" name="choice" id="choice" [(ngModel)]="selectedOption" formControlName ="calcChoice">
-                                <option value="mean" title="D_mean">Dₘₑₐₙ</option> 
-                                <option value="sd" title="D_sd">Dₛd</option> 
-                                <option value="both" title="D_mean and D_sd">Dₘₑₐₙ and Dₛd</option>
-                            </select>
+                            <!-- custom dropdown to allow HTML (subscripts) in labels -->
+                            <div class="relative inline-block">
+                                <button type="button"
+                                        class="w-56 border border-slate-900 rounded-sm px-2 py-1 text-left flex justify-between items-center"
+                                        (click)="toggleCalcDropdown()" aria-haspopup="listbox" [attr.aria-expanded]="calcDropdownOpen">
+                                    <span [innerHTML]="selectedCalcLabel || 'Select variable'"></span>
+                                    <span class="ml-2 text-sm">▾</span>
+                                </button>
+
+                                <ul *ngIf="calcDropdownOpen" class="absolute z-10 mt-1 w-56 bg-white border border-slate-300 rounded-sm shadow" role="listbox">
+                                    <li *ngFor="let opt of calcOptions"
+                                        class="px-3 py-2 hover:bg-slate-100 cursor-pointer"
+                                        (click)="selectCalcOption(opt)"
+                                        role="option">
+                                        <span [innerHTML]="opt.label"></span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- hidden form control to keep reactive form in sync -->
+                            <input type="hidden" formControlName="calcChoice" [value]="selectedOption">
                         </div>
+                        
                         <div class="mx-1 py-3 flex flex-col" *ngIf="selectedOption === 'mean'">
                             <p class="font-semibold pb-2">Enter values:</p>
                             <input type="text" id="dmean" class="form-control border border-slate-900 rounded-sm placeholder-slate-500 px-2 mb-2" placeholder="D_mean" formControlName = "mean">

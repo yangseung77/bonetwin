@@ -42,6 +42,17 @@ export class BoneCalcComponent {
   public selectedPop = ""; // Stores which population is selected
   public clavString = "clavicle"
 
+  // --- insert calc dropdown state/properties here ---
+  public calcOptions = [
+    { value: 'mean', label: 'D<sub>mean</sub>' },
+    { value: 'sd',   label: 'D<sub>sd</sub>' },
+    { value: 'both', label: 'D<sub>mean</sub> and D<sub>sd</sub>' }
+  ];
+  public calcDropdownOpen = false;
+  public selectedCalcLabel = '';
+  // keep selectedOption already exists and will be used for form sync
+  // --- end insertion ---
+
  
 
   zoomConfig = {
@@ -156,6 +167,20 @@ reset(): void {
   this.selectedTable = '';
 }
 
+// --- insert dropdown methods here (after reset, before calc) ---
+ toggleCalcDropdown(): void {
+   this.calcDropdownOpen = !this.calcDropdownOpen;
+ }
+
+ selectCalcOption(opt: { value: string; label: string }): void {
+   this.selectedOption = opt.value;
+   this.selectedCalcLabel = opt.label;
+   if (this.applyForm && typeof this.applyForm.patchValue === 'function') {
+     this.applyForm.patchValue({ calcChoice: opt.value });
+   }
+   this.calcDropdownOpen = false;
+ }
+ // --- end insertion ---
 
 //This function calculates stat data
 calc(){
